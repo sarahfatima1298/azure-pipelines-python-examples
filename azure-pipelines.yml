@@ -16,6 +16,7 @@ jobs:
   - task: ServiceNow Job Notification@0
     inputs:
       connectedServiceName: 'Mohan'
+      upstream: '$(BUILD.BUILDURI)'
       Phase: 'STARTED'
   - task: UsePythonVersion@0
     inputs:
