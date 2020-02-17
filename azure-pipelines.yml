@@ -15,8 +15,7 @@ jobs:
   steps:
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'Mohan'
-      upstream: '$(BUILD.BUILDURI)'
+      connectedServiceName: 'Mohan Connection'
       Phase: 'STARTED'
   - task: UsePythonVersion@0
     inputs:
@@ -39,6 +38,13 @@ jobs:
       testResultsFiles: 'reports/django-basic.xml'
       testRunTitle: '$(Agent.OS) - $(Build.BuildNumber)[$(Agent.JobName)] - Python $(python.version)'
     condition: succeededOrFailed()
+  
+  - task: ServiceNow Job Notification@0
+    inputs:
+      connectedServiceName: 'Mohan Connection'
+      Phase: 'COMPLETED'
+
+  
 
 
 
