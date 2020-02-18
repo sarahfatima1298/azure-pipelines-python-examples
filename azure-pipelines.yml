@@ -15,7 +15,7 @@ jobs:
   steps:
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'Mohan Connection'
+      connectedServiceName: 'AzureDevOpsPoc'
       Phase: 'STARTED'
   - task: UsePythonVersion@0
     inputs:
@@ -41,7 +41,7 @@ jobs:
   
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'Mohan Connection'
+      connectedServiceName: 'AzureDevOpsPoc'
       Phase: 'COMPLETED'
 
   
