@@ -83,6 +83,29 @@ jobs:
       upstream: 'Test'
       Phase: 'COMPLETED'
 
+- job: "Prod"
+  pool: server
+  dependsOn: "Deploy"
+  steps:
+
+  - task: Service Now Job Notification Server Extension@1
+    inputs:
+      connectedServiceName: 'AzureDevOpsPoc'
+      UpstreamJob: 'Deploy'
+      Phase: 'STARTED'
+
+  - task: Delay@1
+    inputs:
+      delayForMinutes: '0'
+
+  - task: Service Now Job Notification Server Extension@1
+    inputs:
+      connectedServiceName: 'AzureDevOpsPoc'
+      UpstreamJob: 'Deploy'
+      Phase: 'COMPLETED'
+  
+
+
 
 
   
