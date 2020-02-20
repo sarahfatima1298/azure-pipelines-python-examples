@@ -24,7 +24,7 @@ jobs:
       Phase: 'COMPLETED'
 
 
-- job: 'Test'
+- job: 'Test'
   pool:
     vmImage: 'Ubuntu-16.04'
   strategy:
