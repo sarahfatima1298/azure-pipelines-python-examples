@@ -24,7 +24,14 @@ jobs:
       Phase: 'COMPLETED'
 
 
-- job: 'Test'
+- job: 'Test'
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  strategy:
+    matrix:
+      Python36:
+        python.version: '3.6'
+    maxParallel: 2
   steps:
 
   - task: ServiceNow Job Notification@0
