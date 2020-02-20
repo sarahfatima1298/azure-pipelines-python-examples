@@ -7,7 +7,7 @@ jobs:
   steps:
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'AzureDevOpsPoc'
+      connectedServiceName: 'MohanPoc Connection'
       Phase: 'STARTED'
 
   - task: Bash@3
@@ -20,7 +20,7 @@ jobs:
 
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'AzureDevOpsPoc'
+      connectedServiceName: 'MohanPoc Connection'
       Phase: 'COMPLETED'
 
 
@@ -29,7 +29,7 @@ jobs:
   steps:
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'AzureDevOpsPoc'
+      connectedServiceName: 'MohanPoc Connection'
       upstream: 'Build'
       Phase: 'STARTED'
   - task: UsePythonVersion@0
@@ -56,7 +56,7 @@ jobs:
   
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'AzureDevOpsPoc'
+      connectedServiceName: 'MohanPoc Connection'
       upstream: 'Build'
       Phase: 'COMPLETED'
 
@@ -65,7 +65,7 @@ jobs:
   steps:
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'AzureDevOpsPoc'
+      connectedServiceName: 'MohanPoc Connection'
       upstream: 'Test'
       Phase: 'STARTED'
 
@@ -79,7 +79,7 @@ jobs:
 
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'AzureDevOpsPoc'
+      connectedServiceName: 'MohanPoc Connection'
       upstream: 'Test'
       Phase: 'COMPLETED'
 
@@ -90,7 +90,7 @@ jobs:
 
   - task: Service Now Job Notification Server Extension@1
     inputs:
-      connectedServiceName: 'AzureDevOpsPoc'
+      connectedServiceName: 'MohanPoc Connection'
       UpstreamJob: 'Deploy'
       Phase: 'STARTED'
 
@@ -100,7 +100,7 @@ jobs:
 
   - task: Service Now Job Notification Server Extension@1
     inputs:
-      connectedServiceName: 'AzureDevOpsPoc'
+      connectedServiceName: 'MohanPoc Connection'
       UpstreamJob: 'Deploy'
       Phase: 'COMPLETED'
   
