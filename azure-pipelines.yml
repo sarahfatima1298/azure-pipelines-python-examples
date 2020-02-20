@@ -25,15 +25,7 @@ jobs:
 
 
 - job: 'Test'
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  strategy:
-    matrix:
-      Python36:
-        python.version: '3.6'
-        
   steps:
-
   - task: ServiceNow Job Notification@0
     inputs:
       connectedServiceName: 'AzureDevOpsPoc'
@@ -41,7 +33,7 @@ jobs:
       Phase: 'STARTED'
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: '$(python.version)'
+      versionSpec: '3.6'
       architecture: 'x64'
 
   - script: |
