@@ -3,19 +3,34 @@ trigger:
 name: $(Date:yyyyMMdd)$(Rev:.r)
 jobs:
 
-- job: 'django_basic'
-  pool:
-    vmImage: 'Ubuntu-16.04'
-  strategy:
-    matrix:
-      Python36:
-        python.version: '3.6'
-    maxParallel: 2
-
+- job: 'Build'
   steps:
   - task: ServiceNow Job Notification@0
     inputs:
       connectedServiceName: 'AzureDevOpsPoc'
+      Phase: 'STARTED'
+
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Write your commands here
+        
+        echo 'Hello world'
+
+  - task: ServiceNow Job Notification@0
+    inputs:
+      connectedServiceName: 'Mohan Connection'
+      Phase: 'COMPLETED'
+
+
+- job: 'Test'
+  steps:
+
+  - task: ServiceNow Job Notification@0
+    inputs:
+      connectedServiceName: 'AzureDevOpsPoc'
+      upstream: 'Build'
       Phase: 'STARTED'
   - task: UsePythonVersion@0
     inputs:
@@ -42,7 +57,33 @@ jobs:
   - task: ServiceNow Job Notification@0
     inputs:
       connectedServiceName: 'AzureDevOpsPoc'
+      upstream: 'Build'
       Phase: 'COMPLETED'
+
+- job: "Deploy"
+  steps:
+  
+  - task: ServiceNow Job Notification@0
+    inputs:
+      connectedServiceName: 'AzureDevOpsPoc'
+      upstream: 'Test'
+      Phase: 'STARTED'
+
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Write your commands here
+        
+        echo 'Hello world'
+
+  - task: ServiceNow Job Notification@0
+    inputs:
+      connectedServiceName: 'AzureDevOpsPoc'
+      upstream: 'Test'
+      Phase: 'COMPLETED'
+
+
 
   
 
