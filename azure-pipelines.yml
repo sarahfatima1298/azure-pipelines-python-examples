@@ -25,6 +25,7 @@ jobs:
 
 
 - job: 'Test'
+  dependsOn: 'Build'
   steps:
   - task: ServiceNow Job Notification@0
     inputs:
@@ -60,8 +61,8 @@ jobs:
       Phase: 'COMPLETED'
 
 - job: "Deploy"
+  dependsOn: 'Test'
   steps:
-  
   - task: ServiceNow Job Notification@0
     inputs:
       connectedServiceName: 'AzureDevOpsPoc'
