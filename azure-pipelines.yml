@@ -20,7 +20,7 @@ jobs:
 
   - task: ServiceNow Job Notification@0
     inputs:
-      connectedServiceName: 'Mohan Connection'
+      connectedServiceName: 'AzureDevOpsPoc'
       Phase: 'COMPLETED'
 
 
