@@ -106,6 +106,7 @@ jobs:
       connectedServiceName: 'Sarah Service Connection'
       UpstreamJob: 'Deploy'
       Phase: 'COMPLETED'
+    condition: true
   
 
 
