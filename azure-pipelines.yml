@@ -5,9 +5,9 @@ jobs:
 
 - job: 'Build'
   steps:
-  - task: ServiceNow-DevOps-Agent-Job-Notification@2
+  - task: ServiceNow-DevOps-Agent-Job-Notification@1
     inputs:
-      connectedServiceName: 'Sarah Service Connection'
+      connectedServiceName: 'ADOP connection'
       Phase: 'STARTED'
 
   - task: Bash@3
@@ -18,19 +18,17 @@ jobs:
         
         echo 'Hello world'
 
-  - task: ServiceNow-DevOps-Agent-Job-Notification@2
+  - task: ServiceNow-DevOps-Agent-Job-Notification@1
     inputs:
-      connectedServiceName: 'Sarah Service Connection'
+      connectedServiceName: 'ADOP connection'
       Phase: 'COMPLETED'
 
 
 - job: 'Test'
-  dependsOn: 'Build'
   steps:
-  - task: ServiceNow-DevOps-Agent-Job-Notification@2
+  - task: ServiceNow-DevOps-Agent-Job-Notification@1
     inputs:
-      connectedServiceName: 'Sarah Service Connection'
-      upstream: 'Build'
+      connectedServiceName: 'ADOP connection'
       Phase: 'STARTED'
   - task: UsePythonVersion@0
     inputs:
@@ -54,19 +52,16 @@ jobs:
       testRunTitle: '$(Agent.OS) - $(Build.BuildNumber)[$(Agent.JobName)] - Python $(python.version)'
     condition: succeededOrFailed()
   
-  - task: ServiceNow-DevOps-Agent-Job-Notification@2
+  - task: ServiceNow-DevOps-Agent-Job-Notification@1
     inputs:
-      connectedServiceName: 'Sarah Service Connection'
-      upstream: 'Build'
+      connectedServiceName: 'ADOP connection'
       Phase: 'COMPLETED'
 
 - job: "Deploy"
-  dependsOn: 'Test'
   steps:
-  - task: ServiceNow-DevOps-Agent-Job-Notification@2
+  - task: ServiceNow-DevOps-Agent-Job-Notification@1
     inputs:
-      connectedServiceName: 'Sarah Service Connection'
-      upstream: 'Test'
+      connectedServiceName: 'ADOP connection'
       Phase: 'STARTED'
 
   - task: Bash@3
@@ -77,36 +72,27 @@ jobs:
         
         echo 'Hello world'
 
-  - task: ServiceNow-DevOps-Agent-Job-Notification@2
+  - task: ServiceNow-DevOps-Agent-Job-Notification@1
     inputs:
-      connectedServiceName: 'Sarah Service Connection'
-      upstream: 'Test'
+      connectedServiceName: 'ADOP connection'
       Phase: 'COMPLETED'
 
 - job: "Prod"
-  pool: server
-  dependsOn: "Deploy"
   steps:
 
-  - task: ServiceNow-DevOps-Server-Job-Notification@2
+  - task: ServiceNow-DevOps-Agent-Job-Notification@1
     inputs:
-      connectedServiceName: 'Sarah Service Connection'
-      UpstreamJob: 'Deploy'
+      connectedServiceName: 'ADOP connection'
       Phase: 'STARTED'
 
   - task: Delay@1
     inputs:
       delayForMinutes: '0'
-  - task: ServiceNow-DevOps-Server-Change-Acceleration@1
+  
+  - task: ServiceNow-DevOps-Agent-Job-Notification@1
     inputs:
-      connectedServiceName: 'Sarah Service Connection'
-      UpstreamJob: 'Deploy'
-  - task: ServiceNow-DevOps-Server-Job-Notification@2
-    inputs:
-      connectedServiceName: 'Sarah Service Connection'
-      UpstreamJob: 'Deploy'
+      connectedServiceName: 'ADOP connection'
       Phase: 'COMPLETED'
-    condition: true
   
 
 
