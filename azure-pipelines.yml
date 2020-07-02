@@ -77,7 +77,8 @@ jobs:
       connectedServiceName: 'ADOP connection'
       Phase: 'COMPLETED'
 
-- job: 'Prod'
+- job: "Prod"
+  pool: 'server'
   dependsOn: 'Delay'
   steps:
 
