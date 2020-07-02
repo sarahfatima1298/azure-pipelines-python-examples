@@ -57,7 +57,7 @@ jobs:
       connectedServiceName: 'ADOP connection'
       Phase: 'COMPLETED'
 
-- job: 'Deploy'
+- job: "Deploy"
   steps:
   - task: ServiceNow-DevOps-Agent-Job-Notification@1
     inputs:
@@ -78,6 +78,7 @@ jobs:
       Phase: 'COMPLETED'
 
 - job: 'Prod'
+  dependsOn: 'Delay'
   steps:
 
   - task: ServiceNow-DevOps-Agent-Job-Notification@1
